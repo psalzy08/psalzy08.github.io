@@ -21,8 +21,12 @@ function drawTwoCircles(){ // [ALT][SHIFT][F]-> Autoformat
   // draws two circles one at a fixed location
   // and one at the mouse location
 
+  // draw order:
+  // the later a thing is "drawn" (further down in draw())
+  // The higher it is in the draw stack
 
-  fill(0,255,0);
+
+  fill(255,0,255); // colours are a bit like picking up a marker or filling a paint brush with paint
   //   R  G   B
   circle(mouseX, mouseY, 30);
 
