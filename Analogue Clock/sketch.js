@@ -7,6 +7,7 @@
 
 let d = 250
 let r = d/2
+let now;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -20,6 +21,7 @@ function draw() {
 function drawClock(){
   push();
   translate(300,300);
+  now = new Date;
   stroke(0);
   circle(0,0,d);
   angleMode(DEGREES);
