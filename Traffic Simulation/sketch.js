@@ -2,7 +2,7 @@
 // Peyton Salzsauler
 // October 20th, 2025
 //
-
+let myTrafficLight;
 let myVehicle;
 let direction;
 let eastbound = [];
@@ -15,7 +15,7 @@ function setup() {
   for(let i = 0; i< 20; i++){
     westbound.push(new Vehicle(1, round(random(0,1))));
   }
-  
+  new TrafficLight(0);
 }
 
 function draw() {
@@ -63,11 +63,11 @@ class Vehicle{
     this.direction = direction;
     this.type = type;
     if(this.direction === 1){
-      this.y = random(250, 420);
+      this.y = random(height/2 -60, height/2 -230);
       this.x = random(width);
     }
     else{
-      this.y = random(455, 640);
+      this.y = random(height/2 + 20, height/2 + 190);
       this.x = random(width);
     }
   }
@@ -144,5 +144,17 @@ class Vehicle{
 
   changeColor(){
     this.c = color(random(255), random(255), random(255));
+  }
+}
+class TrafficLight{
+  constructor(light){
+    this.x = 100; this.y = 100;
+    this.light = light;
+  }
+  display(){
+    if(this.light === 0){
+      fill(0,255,0);
+      circle(this.x, this.y, 100);
+    }
   }
 }
