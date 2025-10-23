@@ -125,11 +125,21 @@ class Vehicle{
   }
 
   speedUp(){
-    this.xSpeed = min(this.xSpeed + 1, 15)
+    if(this.xSpeed < 15){
+      this.xSpeed += 1;
+    }
+    else{
+      this.xSpeed = 15;
+    }
   }
 
   speedDown(){
-    this.xSpeed = max(this.xSpeed - 1, 1);
+    if(this.xSpeed >= 1){
+      this.xSpeed -= 1;
+    }
+    else{
+      this.xSpeed = 0;
+    }
   }
 
   changeColor(){
