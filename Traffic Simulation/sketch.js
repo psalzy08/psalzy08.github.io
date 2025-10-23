@@ -9,15 +9,28 @@ let eastbound = [];
 let westbound = [];
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  myVehicle = new Vehicle(1, round(random(0,1)));
+  for(let i = 0; i < 20; i++){
+    eastbound.push(new Vehicle(2, round(random(0,1))));
+  }
+  for(let i = 0; i< 20; i++){
+    westbound.push(new Vehicle(1, round(random(0,1))));
+  }
+  
 }
 
 function draw() {
   background(220);
   drawRoad();
-  myVehicle.display();
-  myVehicle.move();
+
+
+  for(let e of eastbound){
+    e.action();
+  }
+  for(let w of westbound){
+    w.action();
+  }
 }
+
 function drawRoad(){
   //creates the road
   fill(40);
@@ -31,13 +44,42 @@ function drawRoad(){
 
   }
 }
+
+function mousePressed(){
+  if (mouseButton === LEFT){
+    if (keyIsDown(SHIFT)){
+      westbound.push(new Vehicle(1, round(random(0, 1))));
+    }
+    else{
+      eastbound.push(new Vehicle(2, round(random(0, 1))));
+    }
+  }
+}
+
 class Vehicle{
   constructor(direction, type){
-    this.x = random(width); this.y = random(250, 430);
     this.c = color(random(255), random(255), random(255));
     this.xSpeed = random(2,10);
     this.direction = direction;
     this.type = type;
+    if(this.direction === 1){
+      this.y = random(250, 420);
+      this.x = random(width);
+    }
+    else{
+      this.y = random(455, 640);
+      this.x = random(width);
+    }
+  }
+  action(){
+    this.move();
+
+    if (random(100) < 1) this.speedUp();
+    if (random(100) < 1) this.speedDown();
+    if (random(100) < 1) this.changeColor();
+
+
+    this.display();
   }
   display(){
     if(this.type === 0){
@@ -80,5 +122,17 @@ class Vehicle{
         this.x = -400;
       }
     }  
+  }
+
+  speedUp(){
+    this.xSpeed = min(this.xSpeed + 1, 15)
+  }
+
+  speedDown(){
+    this.xSpeed = max(this.xSpeed - 1, 1);
+  }
+
+  changeColor(){
+    this.c = color(random(255), random(255), random(255));
   }
 }

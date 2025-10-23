@@ -56,9 +56,10 @@ function generateTerrain(){ // creates terrain using perlin noise
 function draw() {
   background(255);
 
-
+ //begins the highest point when starting generate terrain
   let highestPoint = generateTerrain();
 
+  //calls the function of the draw flag
   drawFlag(highestPoint.highestX, highestPoint.highestY);
 
   timeX += speed;
