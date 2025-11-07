@@ -12,7 +12,8 @@ let grid = [
   [0, 255, 255, 0, 255],
 ]
 
-
+let countB;
+let countW;
 let rows = grid.length;
 let cols = grid[0].length;
 
@@ -92,6 +93,20 @@ function randomGrid(){
   }
 }
 function checkGrid(){
+  countB = 0;
   //check the grid to see if you won
-  //for(let y = 0; y < rows; )
+  for(let y = 0; y < rows; y++){
+    for(let x = 0; x < cols; x++){
+      if(grid[y][x] = 0){
+        countB += 1;
+        if(countB = rows*cols){
+          textAlign(CENTER);
+          text("You Win!",rows/2, cols /2,);
+        }
+      }
+      if(grid[y][x] = 255){
+        countW += 1;
+      }
+    }
+  }
 }
