@@ -20,12 +20,14 @@ let squareSize = 60;
 
 function setup() {
   createCanvas(cols*squareSize, rows*squareSize);
+  randomGrid();
 }
 
 function draw() {
   background(220);
   renderGrid();
   print(getCurrentX(),getCurrentY());
+  
 }
 
 function mousePressed(){
@@ -36,15 +38,21 @@ function mousePressed(){
   let y = getCurrentY();
 
   //ALWAYS: flip the "focused" tile
-  flip(x,y);
+  
 
   //IF THEY EXIST:
   //flip our NSEW neighbours (cross pattern)
-  if(x+1 < cols) flip(x+1,y);
-  if(y-1 >= 0) flip(x, y-1);
-  if(y+1 < rows) flip(x, y+1);
-  if(x-1 >= 0) flip(x-1, y);
-
+  if(keyIsDown(SHIFT)){
+    flip(x,y);
+  }
+  else{
+    if(x+1 < cols) flip(x+1,y);
+    if(y-1 >= 0) flip(x, y-1);
+    if(y+1 < rows) flip(x, y+1);
+    if(x-1 >= 0) flip(x-1, y);
+    flip(x,y);
+  }
+  
 }
 
 function getCurrentX(){
@@ -77,5 +85,13 @@ function renderGrid(){
 }
 function randomGrid(){
   // create a grid that randomizes every reset
-  
+  for(let y = 0; y < rows; y++){
+    for(let x = 0; x < cols; x++){
+      grid[y][x] = floor(random(0,2))*255;
+    }
+  }
+}
+function checkGrid(){
+  //check the grid to see if you won
+  //for(let y = 0; y < rows; )
 }
