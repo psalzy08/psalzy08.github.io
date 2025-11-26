@@ -5,7 +5,7 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let grid = [
+let grid = [ //creates grid
   [0 ,255, 255, 0, 0],
   [0 , 255 , 0, 255, 0],
   [255, 0, 0, 255, 255],
@@ -39,9 +39,11 @@ function mousePressed(){
    
   if(squarePattern === false){
      if(keyIsDown(SHIFT)){
-      flip(x,y);
+      flip(x,y); //flips middle selected square
+      // if shift is pressed
     }
-    else{
+    else{ 
+      //flips cross pattern
       if(x+1 < cols) flip(x+1,y);
       if(y-1 >= 0) flip(x, y-1);
       if(y+1 < rows) flip(x, y+1);
@@ -50,13 +52,13 @@ function mousePressed(){
     }
   }
   else {
-    // SQUARE PATTERN FLIPPING
+    // flips the square pattern
     if (keyIsDown(SHIFT)) {
       flip(x, y);
       return;
     }
 
-    flip(x, y);  // always flip the center
+    flip(x, y);  // always flips the center
 
     if (x + 1 < cols) flip(x + 1, y);
     if (y + 1 < rows) flip(x, y + 1);
@@ -66,7 +68,7 @@ function mousePressed(){
 }
 
 function getCurrentX(){
-  //determine current col of mouse position
+  //determine current column of mouse position
   let constrainedX = constrain(mouseX, 0, width-1);
   return floor(constrainedX / squareSize);
 }
@@ -77,7 +79,7 @@ function getCurrentY(){
   return floor(constrainedY / squareSize);
 }
 function flip(x,y){
-  //takes a tile @ x,y and inverts its value
+  //find xy of a grid and flips that tile
   if(grid[y][x] === 0) grid[y][x] = 255;
   else grid[y][x] = 0;
 }
@@ -85,7 +87,7 @@ function flip(x,y){
 function renderGrid(){
   stroke(0);// keeps gridlines turned on
 
-  for (let y = 0; y < rows; y++){
+  for (let y = 0; y < rows; y++){  //renders the grid
     for (let x = 0; x < cols; x++){
       let fillColor = grid[y][x];
       fill(fillColor);
@@ -102,8 +104,8 @@ function randomGrid(){
   }
 }
 function checkGrid(){
-  countB = 0;
-  countW = 0;
+  countB = 0; // counts black tiles
+  countW = 0; // counts white tiles
   //check the grid to see if you won
   for(let y = 0; y < rows; y++){
     for(let x = 0; x < cols; x++){
@@ -129,6 +131,7 @@ function checkGrid(){
   }
 }
 function gridOverlay(){
+  // creates green overlay to show selected squares
   let x = getCurrentX();
   let y = getCurrentY();
 
@@ -136,6 +139,7 @@ function gridOverlay(){
   fill(150, 255, 150, 150);
   noStroke();
   if(squarePattern === false){
+    // creates cross pattern overlay
     square(x * squareSize, y * squareSize, squareSize);
 
     if(y-1 >= 0){
@@ -153,7 +157,7 @@ function gridOverlay(){
     stroke(0);
   }
   else{
-  // SQUARE PATTERN OVERLAY
+  // square pattern overlay
   noStroke();
 
   // center
@@ -178,7 +182,8 @@ function gridOverlay(){
 }
 }
 function keyPressed(){
-  if (key === ' '){
+  if (key === ' '){ 
+    //if the spacebar is pressed switch pattern type
     squarePattern = true;
   }
 }
